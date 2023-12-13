@@ -42,3 +42,20 @@
     transform: rotate(45deg);
   }
 }
+
+.text-about-detail {
+  &::first-letter {
+    font-size: 30px;
+    padding-right: 8px;
+  }
+}
+
+img {
+  object-fit: contain;
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}

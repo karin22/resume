@@ -7,6 +7,7 @@ import { MdCastForEducation } from "react-icons/md";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { GiSkills } from "react-icons/gi";
 import { BiSolidContact } from "react-icons/bi";
+import { BsFillPersonBadgeFill } from "react-icons/bs";
 
 function useOutsideAlerter(
   ref: any,
@@ -46,20 +47,26 @@ export default function NavBar() {
       icon: <FaHome />,
     },
     {
-      name: "Education",
-      linkTo: "/#education",
-      icon: <MdCastForEducation />,
-    },
-    {
-      name: "Experience",
-      linkTo: "/#experience",
-      icon: <SiLevelsdotfyi />,
+      name: "About",
+      linkTo: "/#about",
+      icon: <BsFillPersonBadgeFill />,
     },
     {
       name: "Skills",
       linkTo: "/#skills",
       icon: <GiSkills />,
     },
+    // {
+    //   name: "Education",
+    //   linkTo: "/#education",
+    //   icon: <MdCastForEducation />,
+    // },
+    {
+      name: "Experience",
+      linkTo: "/#education",
+      icon: <SiLevelsdotfyi />,
+    },
+
     {
       name: "Contact",
       linkTo: "/#contact",
@@ -70,15 +77,18 @@ export default function NavBar() {
   useEffect(() => {
     window.scrollTo(0, 0);
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
+      localStorage.setItem("theme", "dark");
       document.documentElement.classList.add("dark");
       document.body.dataset.darkMode = "true";
       setIsDarkMode(true);
     } else {
+      localStorage.setItem("theme", "light");
       document.documentElement.classList.remove("dark");
       document.body.dataset.darkMode = "";
     }
@@ -94,8 +104,10 @@ export default function NavBar() {
     setIsDarkMode(event.target.checked);
     if (event.target.checked) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   };
 
@@ -111,37 +123,28 @@ export default function NavBar() {
         }}
         className="inset-x-0 fixed top-0 flex flex-row justify-between z-10 transform transition-all duration-150 bg-transparent text-primary dark:text-white bg-white"
       >
-        <div className="p-4">
-          <div className="font-extrabold tracking-widest text-xl">
-            <a
-              href="#"
-              className="transition duration-500 hover:text-indigo-500"
-            >
-              GARBAGE
-            </a>
+        {/* <!-- Nav Items Working on Tablet & Bigger Sceen --> */}
+        <div className="flex-1">
+          <div className="p-4 hidden md:flex flex-row justify-center font-bold">
+            {menu.current.map((e, index) => {
+              return (
+                <a
+                  data-aos="fade-zoom-in"
+                  key={e.name}
+                  id="hide-after-click"
+                  href={e.linkTo}
+                  className="mx-4 flex items-center gap-2  border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500"
+                >
+                  {e.icon}
+                  {e.name}
+                </a>
+              );
+            })}
           </div>
         </div>
-        {/* <!-- Nav Items Working on Tablet & Bigger Sceen --> */}
-        <div className="p-4 hidden md:flex flex-row justify-between font-bold">
-          {menu.current.map((e, index) => {
-            return (
-              <a
-                data-aos="fade-zoom-in"
-                key={e.name}
-                id="hide-after-click"
-                href={e.linkTo}
-                className="mx-4 flex items-center gap-2  border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500"
-              >
-                {e.icon}
-                {e.name}
-              </a>
-            );
-          })}
-        </div>
-
         <label
           htmlFor="dark-mode"
-          className="mr-16 mt-4"
+          className="mr-16 md:mr-10 lg:mr-16 mt-4 md:fixed md:right-0"
           data-dark-mode={isDarkMode}
         >
           <div className="switch">

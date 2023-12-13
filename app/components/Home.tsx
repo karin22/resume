@@ -63,7 +63,7 @@ const Home = () => {
     <section>
       <header
         id="up"
-        className="h-screen grid place-items-center relative overflow-hidden"
+        className="h-[90dvh] grid place-items-center relative overflow-hidden container"
       >
         <div className="flex flex-col lg:grid lg:grid-cols-12 items-center justify-center h-full">
           <div

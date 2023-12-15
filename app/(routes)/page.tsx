@@ -7,6 +7,8 @@ import Skills from "../components/Skills";
 import Experience from "../components/Experience";
 import Education from "../components/Education";
 import Contact from "../components/Contact";
+import Loading from "../components/layout/Loading";
+
 import NavBar from "@/app/components/layout/NavBar";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -20,7 +22,7 @@ export default function Index() {
     });
     setTimeout(() => {
       setIsRender(true);
-    }, 500);
+    }, 1500);
   }, []);
 
   return (
@@ -49,7 +51,7 @@ export default function Index() {
           </div>
         </div>
       ) : (
-        ""
+        <Loading />
       )}
     </main>
   );

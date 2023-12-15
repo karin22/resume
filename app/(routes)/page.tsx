@@ -22,7 +22,7 @@ export default function Index() {
     });
     setTimeout(() => {
       setIsRender(true);
-    }, 1500);
+    }, 800);
   }, []);
 
   return (

@@ -15,6 +15,7 @@ module.exports = {
       secondary: "#7000ff",
       white: "#fafafa",
       "back-side-bar": "rgba(18, 14, 22,0.8)",
+      light: "#e0e8f3",
     },
     extend: {
       backgroundImage: {

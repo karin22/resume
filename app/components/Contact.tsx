@@ -8,6 +8,7 @@ import { FaLine } from "react-icons/fa";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import CorrectAnimation from "@/app/assets/lottie/correct.json";
+import moment from "moment";
 
 export default function Contact() {
   const [email, setEmail] = useState("");
@@ -32,15 +33,28 @@ export default function Contact() {
     );
   };
 
-  const setSubmittedValue = () => {
-    setSubmitted(isValidEmail && isInValidTopic);
-  };
   const submit = useCallback(() => {
     setIsInValidEmail(!email || !validateEmail(email));
     setIsInValidTopic(!topic);
 
-    setSubmittedValue();
-  }, [email, topic]);
+    if (email && validateEmail(email) && topic) {
+      SentNotification();
+    }
+  }, [email, topic, message]);
+
+  const SentNotification = async () => {
+    const res = await fetch("/api/line-notify", {
+      method: "POST",
+      body: `message=Email: ${email} 
+        Topic: ${topic} 
+        Message: ${message} 
+        Date: ${moment().format("MMMM Do YYYY, h:mm:ss a")}`,
+    });
+
+    if (res.status === 200) {
+      setSubmitted(true);
+    }
+  };
 
   return (
     <section className="sm:pt-40 sm:pb-20 py-20 px-4 lg:mx-0 grid place-items-center overflow-hidden container">

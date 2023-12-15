@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import SideBar, { Menu } from "./SideBar";
 import { FaHome } from "react-icons/fa";
-import { MdCastForEducation } from "react-icons/md";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { GiSkills } from "react-icons/gi";
 import { BiSolidContact } from "react-icons/bi";
@@ -56,11 +55,7 @@ export default function NavBar() {
       linkTo: "/#skills",
       icon: <GiSkills />,
     },
-    // {
-    //   name: "Education",
-    //   linkTo: "/#education",
-    //   icon: <MdCastForEducation />,
-    // },
+
     {
       name: "Experience",
       linkTo: "/#education",
@@ -76,8 +71,6 @@ export default function NavBar() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&

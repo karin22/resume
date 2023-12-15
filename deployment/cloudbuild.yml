@@ -26,4 +26,4 @@ steps:
       - "--region=asia-southeast1"
       - "--allow-unauthenticated"
 substitutions:
-  _PROJECT_NAME: vue-hris-elearning
+  _PROJECT_NAME: resume-project

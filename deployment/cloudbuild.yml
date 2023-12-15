@@ -4,15 +4,16 @@ steps:
     args:
       [
         "build",
-        "-t",
+        "-f",
         "deployment/Dockerfile",
-        "gcr.io/$PROJECT_ID/$_PROJECT_NAME",
+        "-t",
+        "asia.gcr.io/$PROJECT_ID/$_PROJECT_NAME",
         ".",
       ]
 
   # Push the Docker image to Google Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/$_PROJECT_NAME"]
+    args: ["push", "asia.gcr.io/$PROJECT_ID/$_PROJECT_NAME"]
 
   # Deploy to Google Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
@@ -20,7 +21,7 @@ steps:
       - "run"
       - "deploy"
       - "$_PROJECT_NAME"
-      - "--image=gcr.io/$PROJECT_ID/$_PROJECT_NAME"
+      - "--image=asia.gcr.io/$PROJECT_ID/$_PROJECT_NAME"
       - "--platform=managed"
       - "--region=asia-southeast1-a"
       - "--allow-unauthenticated"

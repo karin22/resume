@@ -43,6 +43,10 @@ export default function Contact() {
   }, [email, topic, message]);
 
   const SentNotification = async () => {
+    console.log({
+      NEXT_PUBLIC_ENV_LINE_TOKEN: process.env.NEXT_PUBLIC_ENV_LINE_TOKEN,
+    });
+
     const res = await fetch("/api/line-notify", {
       method: "POST",
       body: `message=Email: ${email} 
